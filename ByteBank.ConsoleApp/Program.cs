@@ -1,6 +1,7 @@
 ﻿using ByteBank.Common;
 using ByteBank.Common.Entities;
 using ByteBank.Common.Leitores;
+using ByteBank.ConsoleApp;
 
 MostrarBanner();
 
@@ -49,7 +50,7 @@ static void ExecutarEscolha(int escolha)
     switch (escolha)
     {
         case 1:
-            LerArquivoBoletos();
+            ConsoleUI.MostrarBoletos("Boletos.csv");
             break;
         // case 2:
         //     var relatorio = new RelatorioDeBoleto(nomeArquivoSaida: "BoletosPorCedente.csv");
@@ -59,18 +60,5 @@ static void ExecutarEscolha(int escolha)
         default:
             Console.WriteLine("Opção inválida. Tente novamente.");
             break;
-    }
-}
-
-static void LerArquivoBoletos()
-{
-    Console.WriteLine("Lendo arquivo de boletos...");
-    
-    var leitor = new LeitorBoleto();
-    List<Boleto> boletos = leitor.LerArquivo("Boletos.csv");
-
-    foreach (var boleto in boletos)
-    {
-        Console.WriteLine($"Cedente: {boleto.CedenteNome}, Valor: {boleto.Valor:#0.00}, Vencimento: {boleto.DataVencimento}");
     }
 }

@@ -22,6 +22,11 @@
         // Outras Informações
         public string CodigoBarras { get; set; } = string.Empty;
         public string LinhaDigitavel { get; set; } = string.Empty;
+
+        public override string ToString()
+        {
+            return $"Cedente: {CedenteNome}, Valor: {Valor:#0.00}, Vencimento: {DataVencimento}";
+        }
     }
 
 }
