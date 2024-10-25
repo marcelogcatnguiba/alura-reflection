@@ -32,7 +32,6 @@ namespace ByteBank.Common
         public void Processar(List<Boleto> boletos)
         {
             var boletosPorCedente = PegaBoletosAgrupados(boletos);
-
             GravarArquivo(boletosPorCedente);
         }
 

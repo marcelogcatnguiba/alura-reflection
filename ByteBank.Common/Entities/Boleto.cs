@@ -25,7 +25,7 @@
 
         public override string ToString()
         {
-            return $"Cedente: {CedenteNome}, Valor: {Valor:#0.00}, Vencimento: {DataVencimento}";
+            return $"Cedente: {CedenteNome}\t\tValor: {Valor:C}, Vencimento: {DataVencimento:d}";
         }
     }
 

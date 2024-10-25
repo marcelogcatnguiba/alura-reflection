@@ -8,5 +8,10 @@ namespace ByteBank.Common.Entities
         public string CedenteConta { get; set; } = string.Empty;
         public decimal Valor { get; set; }
         public int Quantidade { get; set; }
+
+        public override string ToString()
+        {
+            return $"Cedente: {CedenteNome}\t\tValor: {Valor:C}\tQuantidade: {Quantidade}";
+        }
     }
 }

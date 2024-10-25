@@ -1,7 +1,7 @@
 ﻿using ByteBank.Common;
 using ByteBank.Common.Entities;
 using ByteBank.Common.Leitores;
-using ByteBank.ConsoleApp;
+using ByteBank.ConsoleApp.UI;
 
 MostrarBanner();
 
@@ -50,13 +50,18 @@ static void ExecutarEscolha(int escolha)
     switch (escolha)
     {
         case 1:
-            ConsoleUI.MostrarBoletos("Boletos.csv");
+            var leitor = new LeitorBoleto();
+            var boletos = leitor.LerArquivo("Boletos.csv");
+            
+            ConsoleUI.MostrarBoletos(boletos);
             break;
-        // case 2:
-        //     var relatorio = new RelatorioDeBoleto(nomeArquivoSaida: "BoletosPorCedente.csv");
-        //     relatorio.Processar(LeitorDeBoleto.LerBoletos("Boletos.csv"));
+        case 2:
+            var relatorio = new RelatorioDeBoleto(nomeArquivoSaida: "BoletosPorCedente.csv");
+            relatorio.Processar(new LeitorBoleto().LerArquivo("Boletos.csv"));
 
-        //     break;
+            var boletosPorCedente = new LeitorBoletoPorCedente().LerArquivo("BoletosPorCedente.csv");
+            ConsoleUI.MostrarBoletos(boletosPorCedente);
+            break;
         default:
             Console.WriteLine("Opção inválida. Tente novamente.");
             break;
