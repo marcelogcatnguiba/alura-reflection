@@ -1,4 +1,6 @@
 ﻿using ByteBank.Common;
+using ByteBank.Common.Entities;
+using ByteBank.Common.Leitores;
 
 MostrarBanner();
 
@@ -37,6 +39,8 @@ static void MostrarMenu()
     Console.WriteLine();
     Console.WriteLine("1. Ler arquivo de boletos");
     Console.WriteLine();
+    Console.WriteLine("2. Ler arquivo de boletos por cedente");
+    Console.WriteLine();
     Console.Write("Digite o número da opção desejada: ");
 }
 
@@ -47,7 +51,11 @@ static void ExecutarEscolha(int escolha)
         case 1:
             LerArquivoBoletos();
             break;
+        // case 2:
+        //     var relatorio = new RelatorioDeBoleto(nomeArquivoSaida: "BoletosPorCedente.csv");
+        //     relatorio.Processar(LeitorDeBoleto.LerBoletos("Boletos.csv"));
 
+        //     break;
         default:
             Console.WriteLine("Opção inválida. Tente novamente.");
             break;
@@ -57,9 +65,9 @@ static void ExecutarEscolha(int escolha)
 static void LerArquivoBoletos()
 {
     Console.WriteLine("Lendo arquivo de boletos...");
-
-    var leitorDeBoleto = new LeitorDeBoleto();
-    List<Boleto> boletos = leitorDeBoleto.LerBoletos("Boletos.csv");
+    
+    var leitor = new LeitorBoleto();
+    List<Boleto> boletos = leitor.LerArquivo("Boletos.csv");
 
     foreach (var boleto in boletos)
     {

@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
+using ByteBank.Common.Interfaces;
 
-namespace ByteBank.Common
+namespace ByteBank.Common.Leitores
 {
-    public class LeitorDeBoleto
+    public abstract class Leitor<T> : ILeitorArquivos<T>
     {
-        public List<Boleto> LerBoletos(string caminhoArquivo)
+        public List<T> LerArquivo(string caminhoArquivo)
         {
-            var boletos = new List<Boleto>();
+            var result = new List<T>();
 
             using (var reader = new StreamReader(caminhoArquivo))
             {
@@ -18,19 +19,19 @@ namespace ByteBank.Common
                     linha = reader.ReadLine()!;
                     
                     string[] dados = linha.Split(',');
-                    Boleto boleto = MapearTextoParaObjeto<Boleto>(cabecalho, dados);
+                    T boleto = MapearTextoParaObjeto(cabecalho, dados);
 
-                    boletos.Add(boleto);
+                    result.Add(boleto);
                 }
             }
 
-            return boletos;
+            return result;
         }
 
-        private static T MapearTextoParaObjeto<T>(string[] nomesPropriedades, string[] valoresPropriedades)
+        private static T MapearTextoParaObjeto(string[] nomesPropriedades, string[] valoresPropriedades)
         {
             T instancia = Activator.CreateInstance<T>();
-            
+                        
             for (int i = 0; i < nomesPropriedades.Length; i++)
             {
                 var propriedade = nomesPropriedades[i];
